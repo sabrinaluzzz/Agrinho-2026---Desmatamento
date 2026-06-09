@@ -1,1 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Sustentável vs Desmatamento</title>
+    <style>
+        /* --- ESTILOS CSS --- */
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #c62828;
+            --light-bg: #f5f5f5;
+            --dark-text: #333;
+            --white: #ffffff;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1200') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card.danger {
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .card.success {
+            border-top: 5px solid var(--primary-color);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Seção do Simulador Interativo */
+        .simulator {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-danger {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn-danger:hover {
+            background-color: #b71c1c;
+        }
+
+        .btn-success {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background-color: #1b5e20;
+        }
+
+        #result-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: var(--white);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>O Futuro do Agronegócio</h1>
+        <p>Produzir com inteligência, preservar com responsabilidade. A tecnologia e a sustentabilidade andando juntas.</p>
+    </header>
+
+    <main>
+        <section class="grid">
+            <div class="card danger">
+                <h2>O Impacto do Desmatamento</h2>
+                <p>O desmatamento ilegal para a expansão agropecuária traz consequências severas não apenas para o meio ambiente, mas para o próprio setor:</p>
+                <ul>
+                    <li><strong>Mudanças climáticas:</strong> Alteração no regime de chuvas, prejudicando as lavouras.</li>
+                    <li><strong>Erosão do solo:</strong> Perda de nutrientes essenciais para o plantio.</li>
+                    <li><strong>Barreiras comerciais:</strong> Mercados internacionais boicotam produtos de áreas desmatadas.</li>
+                </ul>
+            </div>
+
+            <div class="card success">
+                <h2>Caminhos para o Agro Sustentável</h2>
+                <p>É perfeitamente possível aumentar a produtividade sem derrubar um único hectare de floresta nativa:</p>
+                <ul>
+                    <li><strong>Integração Lavoura-Pecuária-Floresta (ILPF):</strong> Otimiza o uso da terra.</li>
+                    <li><strong>Agricultura de Precisão:</strong> Uso de drones e IA para evitar desperdício de água e insumos.</li>
+                    <li><strong>Recuperação de pastagens:</strong> Utilizar áreas já degradadas em vez de abrir novas áreas.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="simulator">
+            <h2>Simulador de Decisão Agro</h2>
+            <p>Escolha qual caminho você deseja seguir para expandir a sua produção agrícola e veja o resultado:</p>
+            
+            <div class="btn-container">
+                <button class="btn-danger" onclick="simular('desmatar')">Expandir Desmatando</button>
+                <button class="btn-success" onclick="simular('sustentavel')">Expandir com Tecnologia</button>
+            </div>
+
+            <div id="result-box"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Tecnologia a serviço da sustentabilidade no campo — 2026</p>
+    </footer>
+
+    <script>
+        function simular(escolha) {
+            const resultBox = document.getElementById('result-box');
+            resultBox.style.display = "block";
+
+            if (escolha === 'desmatar') {
+                resultBox.style.backgroundColor = "#ffebee";
+                resultBox.style.color = "#c62828";
+                resultBox.innerHTML = `
+                    <h3>⚠️ Alerta de Risco!</h3>
+                    <p>Ao escolher o desmatamento, você obteve lucro rápido, mas o solo se esgotará em poucos anos, as chuvas na sua região diminuíram e grandes compradores internacionais cancelaram os contratos com a sua fazenda.</p>
+                `;
+            } else if (escolha === 'sustentavel') {
+                resultBox.style.backgroundColor = "#e8f5e9";
+                resultBox.style.color = "#2e7d32";
+                resultBox.innerHTML = `
+                    <h3>🌱 Sucesso Sustentável!</h3>
+                    <p>Utilizando a tecnologia e recuperando solos degradados, você aumentou a sua produtividade em 40% na mesma área. Seus produtos ganharam certificação verde e agora são exportados com alto valor de mercado!</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
